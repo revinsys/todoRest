@@ -1,3 +1,3 @@
 import { Model } from './main';
 
-export const todoModel = new Model();
+export const todoModel = new Model([]);

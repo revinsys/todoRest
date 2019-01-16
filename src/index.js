@@ -1,14 +1,13 @@
-import { Model } from './models/main';
+import Koa from 'koa';
+import bodyParser from 'koa-bodyparser';
+import routes from './routes';
 
-const myModel = new Model([
-  { name: "test", check: true, pos: 2 },
-  { name: "test 2", check: false, pos: 3 },
-]);
+const PORT = 4000;
+const app = new Koa();
 
-myModel.create({ name: "test 3", check: false, pos: 1 });
+app.use(bodyParser());
+app.use(routes);
 
-const res1 = myModel.find({}, "pos");
-myModel.update({ name: "test" }, { name: "new name" });
-const res2 = myModel.find({}, "name");
-
-console.log(res1, res2);
+app.listen(PORT, () => {
+  console.log(`Server started on ${PORT} port`);
+});
