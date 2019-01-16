@@ -1,4 +1,5 @@
 import { listModel } from '../models/list';
+import { todoModel } from '../models/todo';
 
 export const listController = {
   createListItem(ctx) {
@@ -13,6 +14,7 @@ export const listController = {
   removeListItem(ctx) {
     const { id } = ctx.params;
     const result = listModel.remove({ id });
+    todoModel.remove({ listId: result[0].id });
     ctx.body = result;
   },
   updateListItem(ctx) {
